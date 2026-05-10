@@ -167,7 +167,7 @@ export default function Home() {
       {/* ══ HERO — Full bleed image ═══════════════════════════════════ */}
       <section className="hero">
         <div className="hero__img-wrap">
-          <img src="/slot.png" alt="Arne Slot" className="hero__img" />
+          <img src="/slot.jpeg" alt="Arne Slot" className="hero__img" />
           <div className="hero__gradient" />
         </div>
 
