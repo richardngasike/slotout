@@ -252,35 +252,50 @@ export default function Home() {
   }
 
   async function handleVote(choice) {
-    if (voted || voting) return;
-    setVoting(true);
-    const voterId = getOrCreateVoterId();
-    try {
-      const res = await fetch('/api/vote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ choice, voterId }),
-      });
-      const data = await res.json();
-      if (res.status === 409 || res.ok) {
-        storeVote(choice);
-        setVoted(choice);
-        setVotes({ keep: data.keep, sack: data.sack });
-        showToast(
-          choice === 'sack'
-            ? 'SACK SLOT — Your vote is recorded!'
-            : 'KEEP SLOT — Your vote is recorded!'
-        );
-      } else {
-        showToast('Something went wrong. Try again.');
-      }
-    } catch {
-      showToast('Network error. Please try again.');
-    } finally {
-      setVoting(false);
-    }
+  // ─── Funny popup for KEEP SLOT ─────────────────────────────
+  if (choice === 'keep') {
+    alert('NO 😂 YOU ARE A MAN UNITED / EVERTON FAN');
+    return;
   }
 
+  if (voted || voting) return;
+
+  setVoting(true);
+
+  const voterId = getOrCreateVoterId();
+
+  try {
+    const res = await fetch('/api/vote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ choice, voterId }),
+    });
+
+    const data = await res.json();
+
+    if (res.status === 409 || res.ok) {
+      storeVote(choice);
+      setVoted(choice);
+
+      setVotes({
+        keep: data.keep,
+        sack: data.sack,
+      });
+
+      showToast(
+        choice === 'sack'
+          ? 'SACK SLOT — Your vote is recorded!'
+          : 'KEEP SLOT — Your vote is recorded!'
+      );
+    } else {
+      showToast('Something went wrong. Try again.');
+    }
+  } catch {
+    showToast('Network error. Please try again.');
+  } finally {
+    setVoting(false);
+  }
+}
   const total = votes.keep + votes.sack;
   const keepPct = total > 0 ? Math.round((votes.keep / total) * 100) : 50;
   const sackPct = total > 0 ? Math.round((votes.sack / total) * 100) : 50;
