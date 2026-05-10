@@ -117,44 +117,35 @@ export default function Home() {
   }
 
   async function handleVote(choice) {
-  if (voted || voting) return;
-
-  setVoting(true);
-
-  const voterId = getOrCreateVoterId();
-
-  try {
-    const res = await fetch('/api/vote', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice, voterId }),
-    });
-
-    const data = await res.json();
-
-    if (res.status === 409 || res.ok) {
-      storeVote(choice);
-      setVoted(choice);
-
-      setVotes({
-        keep: data.keep,
-        sack: data.sack,
+    if (voted || voting) return;
+    setVoting(true);
+    const voterId = getOrCreateVoterId();
+    try {
+      const res = await fetch('/api/vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ choice, voterId }),
       });
-
-      showToast(
-        choice === 'sack'
-          ? 'SACK SLOT — Your vote is recorded!'
-          : 'KEEP SLOT — Your vote is recorded!'
-      );
-    } else {
-      showToast('Something went wrong. Try again.');
+      const data = await res.json();
+      if (res.status === 409 || res.ok) {
+        storeVote(choice);
+        setVoted(choice);
+        setVotes({ keep: data.keep, sack: data.sack });
+        showToast(
+          choice === 'sack'
+            ? 'SACK SLOT — Your vote is recorded!'
+            : 'KEEP SLOT — Your vote is recorded!'
+        );
+      } else {
+        showToast('Something went wrong. Try again.');
+      }
+    } catch {
+      showToast('Network error. Please try again.');
+    } finally {
+      setVoting(false);
     }
-  } catch {
-    showToast('Network error. Please try again.');
-  } finally {
-    setVoting(false);
   }
-}
+
   const total = votes.keep + votes.sack;
   const keepPct = total > 0 ? Math.round((votes.keep / total) * 100) : 50;
   const sackPct = total > 0 ? Math.round((votes.sack / total) * 100) : 50;
@@ -176,7 +167,7 @@ export default function Home() {
       {/* ══ HERO — Full bleed image ═══════════════════════════════════ */}
       <section className="hero">
         <div className="hero__img-wrap">
-          <img src="/slot.jpeg" alt="Arne Slot" className="hero__img" />
+          <img src="/slot.png" alt="Arne Slot" className="hero__img" />
           <div className="hero__gradient" />
         </div>
 
@@ -287,7 +278,7 @@ export default function Home() {
       <footer className="site-footer">
         <p className="footer-ynwa">YOU'LL NEVER WALK ALONE</p>
         <p className="footer-dev">
-          Developed by <span>LIVERPOOL FANS</span> · From Liverpool Fans, For Liverpool Fans
+          Developed by <span>Liverpool fans</span> · From Liverpool Fans, For Liverpool Fans
         </p>
         <p className="footer-disclaimer">
           Independent fan petition. Not affiliated with Liverpool FC or any official club entity.
