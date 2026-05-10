@@ -252,12 +252,13 @@ export default function Home() {
   }
 
   async function handleVote(choice) {
-  // ─── Funny popup for KEEP SLOT ─────────────────────────────
+  // ─── KEEP SLOT popup only ─────────────────────────────
   if (choice === 'keep') {
-    alert('NO 😂 YOU ARE A MAN UNITED / EVERTON FAN');
+    alert('NO 😂 YOU ARE MAN UNITED / EVERTON FAN');
     return;
   }
 
+  // ─── Prevent double voting ────────────────────────────
   if (voted || voting) return;
 
   setVoting(true);
@@ -267,31 +268,42 @@ export default function Home() {
   try {
     const res = await fetch('/api/vote', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice, voterId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        choice: 'sack',
+        voterId,
+      }),
     });
+
+    // ─── If backend fails, still count locally ──────────
+    if (!res.ok) {
+      throw new Error('Vote failed');
+    }
 
     const data = await res.json();
 
-    if (res.status === 409 || res.ok) {
-      storeVote(choice);
-      setVoted(choice);
+    storeVote('sack');
+    setVoted('sack');
 
-      setVotes({
-        keep: data.keep,
-        sack: data.sack,
-      });
+    setVotes({
+      keep: data.keep ?? votes.keep,
+      sack: data.sack ?? votes.sack + 1,
+    });
 
-      showToast(
-        choice === 'sack'
-          ? 'SACK SLOT — Your vote is recorded!'
-          : 'KEEP SLOT — Your vote is recorded!'
-      );
-    } else {
-      showToast('Something went wrong. Try again.');
-    }
-  } catch {
-    showToast('Network error. Please try again.');
+    showToast('SACK SLOT — Your vote is recorded!');
+  } catch (err) {
+    // ─── Fallback if API/network fails ──────────────────
+    setVotes((prev) => ({
+      ...prev,
+      sack: prev.sack + 1,
+    }));
+
+    storeVote('sack');
+    setVoted('sack');
+
+    showToast('SACK SLOT — Vote recorded locally!');
   } finally {
     setVoting(false);
   }
