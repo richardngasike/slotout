@@ -15,202 +15,67 @@ import {
   FiVolume2,
 } from 'react-icons/fi';
 
-// ─── Arne Slot Era Failings (Updated 10/05/2026) ──────────────────────────
+// ─── Failings data ────────────────────────────────────────────────────────
 const FAILINGS = [
   {
     Icon: FiDollarSign,
-    title: '£450M+ Spent — Liverpool Got Worse',
+    title: '£450 Million Spent — Nothing to Show',
     detail:
-      'Liverpool spent over £450 million rebuilding the squad under Arne Slot, yet performances collapsed across all competitions. Massive investment produced regression instead of progress.',
+      'A colossal £450m+ transfer outlay and Liverpool still crumbled across every competition in 2025/26.',
   },
-
-  {
-    Icon: FiAward,
-    title: 'Premier League Success Was Klopp’s Foundation',
-    detail:
-      "Any early success came from Jurgen Klopp’s established squad structure, mentality, and years of tactical groundwork. Fans increasingly believe Slot inherited a winning machine rather than building one.",
-  },
-
-  {
-    Icon: FiTrendingDown,
-    title: 'From Champions to Top-Four Scramble',
-    detail:
-      'Liverpool went from league champions to fighting just to secure Champions League qualification. Consistency vanished and the team lost its fear factor.',
-  },
-
   {
     Icon: FiXCircle,
-    title: 'Champions League Disaster',
+    title: 'Knocked Out of Champions League — Twice',
     detail:
-      'Liverpool crashed out of Europe in humiliating fashion, including a heavy aggregate defeat to PSG. European ambitions completely collapsed under Slot’s management.',
+      'Humiliating back-to-back Champions League exits under Slot\'s watch, dashing all European glory.',
   },
-
-  {
-    Icon: FiShield,
-    title: 'Domestic Cups Completely Failed',
-    detail:
-      'Liverpool failed in both domestic cups, missing huge opportunities for silverware despite having one of the most expensive squads in Europe.',
-  },
-
   {
     Icon: FiTrendingDown,
     title: 'Handed Newcastle the Carabao Cup',
     detail:
-      'Liverpool surrendered the Carabao Cup through passive football, poor game management, and lack of intensity — allowing Newcastle to celebrate while Liverpool folded under pressure.',
+      'A shocking capitulation gifted Newcastle United the Carabao Cup — a trophy Liverpool should have owned.',
   },
-
   {
     Icon: FiShield,
-    title: 'FA Cup Collapse',
+    title: 'Crystal Palace Won the FA Cup on His Watch',
     detail:
-      "Liverpool’s FA Cup run imploded embarrassingly despite favorable expectations. Fans viewed the campaign as another example of the team lacking mentality in decisive moments.",
+      "Liverpool's FA Cup campaign imploded, handing Crystal Palace their moment of glory at our expense.",
   },
-
+  {
+    Icon: FiAward,
+    title: "Premier League Title? That Was Klopp's Squad",
+    detail:
+      "The title was won on the back of Klopp's meticulously built roster and Salah's brilliance — not Slot's ideas.",
+  },
   {
     Icon: FiActivity,
-    title: 'Defensive Structure Fell Apart',
+    title: '11 Defeats & 48 Goals Conceded in 2025/26',
     detail:
-      'Liverpool conceded goals at an alarming rate throughout 2025/26. The aggressive, disciplined defensive identity Klopp built disappeared under Slot.',
+      'Liverpool suffered 11 Premier League defeats and conceded 48 goals — crashing from champions to barely scraping top four.',
   },
-
   {
     Icon: FiAlertTriangle,
-    title: 'Set-Piece Defending Became a National Joke',
+    title: 'Record Set-Piece Goals Conceded',
     detail:
-      'Liverpool conceded 18 set-piece goals in 2025/26 — among the worst records in the league. Defensive coaching and organization were repeatedly questioned.',
+      "18 set-piece goals in 2025/26 — the worst record in Liverpool's entire Premier League history. Defensive coaching has been woeful.",
   },
-
-  {
-    Icon: FiUsers,
-    title: 'Sold Luis Díaz — Then Created a Striker Crisis',
-    detail:
-      'Luis Díaz was sold while Liverpool already lacked attacking depth and reliable finishing. The club failed to replace his energy, dribbling, and goals, leaving the attack blunt and predictable.',
-  },
-
-  {
-    Icon: FiUsers,
-    title: 'No Proper Salah Succession Plan',
-    detail:
-      'Mohamed Salah’s decline and eventual exit concerns exposed Liverpool’s lack of long-term planning. No elite replacement was prepared despite years of warnings.',
-  },
-
-  {
-    Icon: FiActivity,
-    title: 'Attack Lost Its Identity',
-    detail:
-      'Liverpool became slow, predictable, and toothless in attack. The fast transitions and aggressive pressing football fans loved under Klopp disappeared almost entirely.',
-  },
-
-  {
-    Icon: FiMic,
-    title: '"Slot Ball" Became an Insult',
-    detail:
-      'Supporters began mocking the sideways passing and low-tempo football as “Slot Ball” — a style many fans considered boring, passive, and anti-Liverpool.',
-  },
-
   {
     Icon: FiVolume2,
-    title: 'Anfield Started Booing the Team',
+    title: 'Booed Off by Anfield — Relationship in Tatters',
     detail:
-      'For one of the first times in years, Anfield openly booed performances and substitutions under Slot. Fan frustration moved from social media directly into the stadium.',
+      'Fans booed Slot live at Anfield in May 2026 over substitution decisions. His bond with the Kop is broken.',
   },
-
-  {
-    Icon: FiVolume2,
-    title: 'Booed Over Rio Ngumoha Substitution',
-    detail:
-      'Slot was loudly booed after substituting youngster Rio Ngumoha against Chelsea in May 2026. The reaction symbolized how damaged the relationship between manager and supporters had become.',
-  },
-
   {
     Icon: FiUsers,
-    title: 'Lost the Trust of the Fanbase',
+    title: 'Lost Mo Salah — No Succession Plan',
     detail:
-      'Many supporters no longer believe in Slot’s long-term vision. Confidence in his tactics, substitutions, recruitment influence, and leadership has sharply declined.',
+      'The all-time great left without a credible replacement lined up, leaving a gaping hole in attack.',
   },
-
-  {
-    Icon: FiTrendingDown,
-    title: 'Anfield Fear Factor Disappeared',
-    detail:
-      'Opposition teams no longer fear coming to Anfield. Liverpool dropped points regularly at home, and teams openly played with confidence against Slot’s side.',
-  },
-
-  {
-    Icon: FiAlertTriangle,
-    title: 'Failed Against Smaller Teams',
-    detail:
-      'Liverpool repeatedly dropped points against relegation-threatened and newly promoted teams, including embarrassing home performances that sparked fan outrage.',
-  },
-
-  {
-    Icon: FiActivity,
-    title: 'No Tactical Flexibility',
-    detail:
-      'Slot was heavily criticized for refusing to adapt tactically during matches. Liverpool often looked slow to react when games turned against them.',
-  },
-
-  {
-    Icon: FiShield,
-    title: 'Game Management Was Poor',
-    detail:
-      'Liverpool repeatedly lost leads, conceded late goals, and looked mentally fragile in important moments throughout the season.',
-  },
-
-  {
-    Icon: FiTrendingDown,
-    title: 'Players Regressed Under His Coaching',
-    detail:
-      'Several players looked worse compared to previous seasons, with fans questioning whether Slot’s coaching methods were improving anyone at all.',
-  },
-
-  {
-    Icon: FiActivity,
-    title: 'Pressing Identity Completely Vanished',
-    detail:
-      'Klopp’s famous high-intensity pressing system disappeared and was replaced by a passive mid-block that many supporters felt betrayed Liverpool’s identity.',
-  },
-
-  {
-    Icon: FiUsers,
-    title: 'Disconnect Between Manager and Supporters',
-    detail:
-      'Slot’s interviews and optimistic tone during poor results frustrated many fans, who felt he underestimated the scale of Liverpool’s decline.',
-  },
-
-  {
-    Icon: FiAlertTriangle,
-    title: '“Survival Mode” Comments Angered Fans',
-    detail:
-      'Slot describing Liverpool as being in “survival mode” during key matches outraged supporters who expect Liverpool to dominate games, not merely survive them.',
-  },
-
-  {
-    Icon: FiTrendingDown,
-    title: 'Massive Spending — No Clear System',
-    detail:
-      'Despite huge recruitment investment, Liverpool still lacked chemistry, balance, and a recognizable football structure deep into Slot’s tenure.',
-  },
-
   {
     Icon: FiMic,
-    title: 'Sack Discussions Became Mainstream',
+    title: '"Slot Ball" — Dull, Toothless Football',
     detail:
-      'By 2026, serious discussions around replacing Slot had become widespread across fan channels, media outlets, and football communities online.',
-  },
-
-  {
-    Icon: FiUsers,
-    title: 'Compared Unfavorably to Klopp Constantly',
-    detail:
-      'Every weak performance intensified comparisons to Jurgen Klopp, making it increasingly difficult for Slot to establish his own legacy at Liverpool.',
-  },
-
-  {
-    Icon: FiXCircle,
-    title: 'Season Defined by Underachievement',
-    detail:
-      'The 2025/26 season became associated with wasted spending, tactical confusion, poor football, broken momentum, and growing supporter anger.',
+      'Fans coined "Slot Ball" for the sideways, low-energy style that has nothing to do with the high-press Klopp identity.',
   },
 ];
 
@@ -252,62 +117,35 @@ export default function Home() {
   }
 
   async function handleVote(choice) {
-  // ─── KEEP SLOT popup only ─────────────────────────────
-  if (choice === 'keep') {
-    alert('NO 😂 YOU ARE MAN UNITED / EVERTON FAN');
-    return;
-  }
-
-  // ─── Prevent double voting ────────────────────────────
-  if (voted || voting) return;
-
-  setVoting(true);
-
-  const voterId = getOrCreateVoterId();
-
-  try {
-    const res = await fetch('/api/vote', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        choice: 'sack',
-        voterId,
-      }),
-    });
-
-    // ─── If backend fails, still count locally ──────────
-    if (!res.ok) {
-      throw new Error('Vote failed');
+    if (voted || voting) return;
+    setVoting(true);
+    const voterId = getOrCreateVoterId();
+    try {
+      const res = await fetch('/api/vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ choice, voterId }),
+      });
+      const data = await res.json();
+      if (res.status === 409 || res.ok) {
+        storeVote(choice);
+        setVoted(choice);
+        setVotes({ keep: data.keep, sack: data.sack });
+        showToast(
+          choice === 'sack'
+            ? 'SACK SLOT — Your vote is recorded!'
+            : 'KEEP SLOT — Your vote is recorded!'
+        );
+      } else {
+        showToast('Something went wrong. Try again.');
+      }
+    } catch {
+      showToast('Network error. Please try again.');
+    } finally {
+      setVoting(false);
     }
-
-    const data = await res.json();
-
-    storeVote('sack');
-    setVoted('sack');
-
-    setVotes({
-      keep: data.keep ?? votes.keep,
-      sack: data.sack ?? votes.sack + 1,
-    });
-
-    showToast('SACK SLOT — Your vote is recorded!');
-  } catch (err) {
-    // ─── Fallback if API/network fails ──────────────────
-    setVotes((prev) => ({
-      ...prev,
-      sack: prev.sack + 1,
-    }));
-
-    storeVote('sack');
-    setVoted('sack');
-
-    showToast('SACK SLOT — Vote recorded locally!');
-  } finally {
-    setVoting(false);
   }
-}
+
   const total = votes.keep + votes.sack;
   const keepPct = total > 0 ? Math.round((votes.keep / total) * 100) : 50;
   const sackPct = total > 0 ? Math.round((votes.sack / total) * 100) : 50;
