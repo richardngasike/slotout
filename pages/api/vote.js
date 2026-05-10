@@ -5,18 +5,16 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// helper: get totals
+// helper: fast totals using SQL (NO row fetching)
 async function getTotals() {
-  const { data, error } = await supabase
-    .from('votes')
-    .select('choice');
+  const { data, error } = await supabase.rpc('get_vote_totals');
 
   if (error) throw error;
 
-  const keep = data.filter(v => v.choice === 'keep').length;
-  const sack = data.filter(v => v.choice === 'sack').length;
-
-  return { keep, sack };
+  return {
+    keep: Number(data[0].keep),
+    sack: Number(data[0].sack)
+  };
 }
 
 export default async function handler(req, res) {
@@ -43,7 +41,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing voter ID' });
     }
 
-    // check existing vote safely
+    // check if already voted
     const { data: existing, error: checkErr } = await supabase
       .from('votes')
       .select('id')
@@ -55,7 +53,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Database error' });
     }
 
-    // already voted
     if (existing) {
       const totals = await getTotals();
       return res.status(409).json({
@@ -70,7 +67,7 @@ export default async function handler(req, res) {
       .insert({ voter_id: voterId, choice });
 
     if (insertErr) {
-      // handle race condition (unique constraint)
+      // handle race condition
       if (insertErr.code === '23505') {
         const totals = await getTotals();
         return res.status(409).json({
