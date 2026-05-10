@@ -440,7 +440,7 @@ export default function Home() {
       <footer className="site-footer">
         <p className="footer-ynwa">YOU'LL NEVER WALK ALONE</p>
         <p className="footer-dev">
-          Developed by <span>Richard Ngasike</span> · From Liverpool Fans, For Liverpool Fans
+          Developed by <span>LIVERPOOL FANS</span> · From Liverpool Fans, For Liverpool Fans
         </p>
         <p className="footer-disclaimer">
           Independent fan petition. Not affiliated with Liverpool FC or any official club entity.
